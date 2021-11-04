@@ -1,65 +1,81 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<link rel="stylesheet" href="https://use.typekit.net/oov2wcw.css">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>	ADA 08</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title> ADA 08</title>
 	<script>
-		function buscar(){
+		function buscar() {
 			let buscar = document.getElementById("buscar").value;
-			var req = new XMLHttpRequest(); 
+			var req = new XMLHttpRequest();
 			//cambiar por tu carpeta donde se encuentre el proyecto:
 			//ejemplo: http://localhost/aqui_tu_direccion_de_carpetas/consulta.php 
-	        let url = new URL('http://localhost/BusquedaEmpresarial/consultas.php');
-	        url.searchParams.set('buscar', buscar);
-	        req.open('GET', url); 
-	        req.send();
-	        console.log(url);
-	        req.onload = function() {
-	          const respuesta = req.responseText;
-	          console.log(respuesta);
-	          arregloDeSubCadenas = respuesta.split("<br>");
-	          mostrarDatos(arregloDeSubCadenas);
-	          console.log(arregloDeSubCadenas);
+			let url = new URL('http://localhost/BusquedaEmpresarial/consultas.php');
+			url.searchParams.set('buscar', buscar);
+			req.open('GET', url);
+			req.send();
+			console.log(url);
+			req.onload = function () {
+				const respuesta = req.responseText;
+				console.log(respuesta);
+				arregloDeSubCadenas = respuesta.split("<br>");
+				mostrarDatos(arregloDeSubCadenas);
+				console.log(arregloDeSubCadenas);
 
-	        }
-	    }
-	    let myArticle;
-        let myPara1;
-	      function mostrarDatos(arrarRespuesta) {
-	        let trD = Array.prototype.slice.call(document.getElementsByClassName("creado"), 0);
-	        for(element of trD){
-	          element.remove();
-	        }
-	        if (arrarRespuesta.length == 1 ) {
-	          myArticle = document.createElement('div');
-	          myPara1 = document.createElement('a');
+			}
+		}
+		let myArticle;
+		let myPara1;
+		function mostrarDatos(arrarRespuesta) {
+			console.log(arrarRespuesta);
+			let trD = Array.prototype.slice.call(document.getElementsByClassName("creado"), 0);
+			for (element of trD) {
+				element.remove();
+			}
+			if (arrarRespuesta.length == 1) {
+				myArticle = document.createElement('div');
+				myPara1 = document.createElement('a');
 
-	          myPara1.textContent = arrarRespuesta[0];
-	              
-	          myArticle.className = 'field creado';
-	          myArticle.style = 'aling: center'
-	          myArticle.appendChild(myPara1);
-	          document.body.appendChild(myArticle);
-	        } else {
+				myPara1.textContent = arrarRespuesta[0];
 
-	        }
-	        for (var i = 0; i < arrarRespuesta.length-1; i++) {
-	          myArticle = document.createElement('div');
-	          myPara1 = document.createElement('a');
+				myArticle.className = 'field creado';
+				myArticle.style = 'aling: center'
+				myArticle.appendChild(myPara1);
+				document.body.appendChild(myArticle);
+			} else {
 
-	          myPara1.textContent = arrarRespuesta[i];
-	              
-	          myArticle.className = 'field creado';
-	          myArticle.style = 'aling: center'
-	          myArticle.appendChild(myPara1);
-	          document.body.appendChild(myArticle);
-	          
-	        }    
+			}
+
+			//results
+			let myArticle2 = document.createElement('div');
+			let myPara2 = document.createElement('a');
+
+			let lg = arrarRespuesta.length - 1;
+			myArticle2.innerHTML = "<strong> Resultados:" + lg + "</strong>";
+
+			myArticle2.className = 'field creado';
+			myArticle2.style = 'aling: center'
+			//myArticle2.appendChild(myPara2);
+			document.body.appendChild(myArticle2);
+			// end results	
+			for (var i = 0; i < arrarRespuesta.length - 1; i++) {
+				myArticle = document.createElement('div');
+				myPara1 = document.createElement('a');
+
+				myPara1.textContent = arrarRespuesta[i];
+
+				myArticle.className = 'field creado';
+				myArticle.style = 'aling: center'
+				myArticle.appendChild(myPara1);
+				document.body.appendChild(myArticle);
+
+			}
 		}
 	</script>
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
 	<div class="box">
 		<div class="container-1">
@@ -67,9 +83,10 @@
 			<h2>Indización y búsqueda</h>
 		</div>
 	</div>
-		<div class="field" id="searchform">
-			<input type="text" name="buscar" id="buscar" placeholder="Buscando...">
-			<button type="submit" id="buscador" onclick="buscar()" name="buscador">Buscar</button>
-		</div>
+	<div class="field" id="searchform">
+		<input type="text" name="buscar" id="buscar" placeholder="Buscando...">
+		<button type="submit" id="buscador" onclick="buscar()" name="buscador">Buscar</button>
+	</div>
 </body>
+
 </html>
